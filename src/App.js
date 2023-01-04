@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ButtonLogIn from './components/ButtonLogIn';
 import Footer from './components/Footer';
 import ParticlesLayer from './components/ParticlesLayer';
 import dvrst from './images/dvrst.jpg'; // Tell webpack this JS file uses this image
@@ -20,17 +21,20 @@ function App() {
     <Footer colour={colour}/>
     <ParticlesLayer colour={colour}/>
 
+
     {/*main div */}
     <div className="flex justify-center flex-col items-center h-screen">
     <button onClick={onClickHandler}>press to change</button>
      <div>
-      <Timer />
 
+      <Timer />
+      <ButtonLogIn />
       <SearchBar />
 
     </div>
 
     <br />
+
 
 <SearchResults artist={"Dvrst"} title={'close eyes'} songTime={"15:15"}/>
 
