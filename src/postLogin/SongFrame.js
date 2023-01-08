@@ -11,7 +11,7 @@ export default function SongFrame(props) {
     <div className='flex'>
       {/* pic */}
         <div className='hidden md:block overflow-hidden'>
-          <img src={dvrst} className="h-12 w-12" />
+          <img src={props.image} className="h-12 w-12" />
         </div>
 
     {/* artist data */}
