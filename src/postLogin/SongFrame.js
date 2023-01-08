@@ -3,7 +3,8 @@ import dvrst from '.././images/dvrst.jpg'; // Tell webpack this JS file uses thi
 
 export default function SongFrame(props) {
   return (
-    <>
+    <div className='bg-frame justify-center flex flex-col rounded-md mb-3'>
+
     {/*Picture and song data */}
     <div className='flex justify-between p-4'>
 
@@ -30,7 +31,7 @@ export default function SongFrame(props) {
     </div>
 
 
-    </>
+    </div>
 
 
 

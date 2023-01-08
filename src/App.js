@@ -46,21 +46,23 @@ const onChangeHandler = async (e) => {
 
     {/*main div */}
     <div className="flex justify-center flex-col items-center h-screen">
-    <button onClick={onClickHandler}>press to change</button>
-     <div>
-
-      <Timer />
-      <ButtonLogIn />
+     <div className='mt-36'>
+     <button onClick={onClickHandler}>press to change</button>
+      <Timer/>
+      <ButtonLogIn/>
       <SearchBar onChange={onChangeHandler}/>
 
     </div>
 
     <br />
+    <div className='overflow-scroll w-1/2 my-2'>
+
+
 
 {searchResult && searchResult.map((song) => {
   const image = song.album.images.reduce(
     (smallest, image) => {
-      if (image.height < smallest.height) return image
+      if (image.height > smallest.height) return image
       return smallest
     },
     song.album.images[0]
@@ -72,7 +74,7 @@ const onChangeHandler = async (e) => {
 
 <SearchResults artist={"DvrstRANDOMMMMMMMMM"} title={'close eyesSSSSSSSSSSSSS'} songTime={"15:15"}/>
 
-
+</div>
 
 
 
