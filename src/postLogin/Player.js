@@ -7,7 +7,6 @@ export default function Player({ accessToken, trackUri }) {
   useEffect(() => setPlay(true), [trackUri])
 
   if (!accessToken) return null
-  console.log("HERE")
   return (
     <div className="fixed bottom-0 w-screen">
 

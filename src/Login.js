@@ -7,7 +7,6 @@ import Timer from './postLogin/Timer';
 const code = new URLSearchParams(window.location.search).get("code")
 
 function Login() {
-console.log("yo")
   return (
     <>
     <Footer colour={"#1DB954"}/>

@@ -29,7 +29,6 @@ app.post("/search", async (req, res) => {
       // Get the authorization code from the query string
 
       const code = req.body.code;
-      console.log("code is", code)
 
       // Use the authorization code to request an access token
      const data = await spotifyApi.authorizationCodeGrant(code);

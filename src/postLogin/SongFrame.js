@@ -1,11 +1,23 @@
 import React from 'react'
+import getAverageColor from 'get-average-color'
+
+function componentToHex(c) {
+  c.toString()
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
 
 export default function SongFrame(props) {
 
-
-
   return (
-    <div onClick={() => props.onSongPick(props.uri)} className='cursor-pointer bg-frame justify-center flex flex-col rounded-md mb-3'>
+    <div onClick={() => {
+      getAverageColor(props.image).then(rgb => props.onSongPick(props.uri, rgbToHex(rgb.r, rgb.g, rgb.b)) );
+
+    }} className='cursor-pointer bg-frame justify-center flex flex-col rounded-md mb-3'>
 
     {/*Picture and song data */}
     <div className='flex justify-between p-4'>

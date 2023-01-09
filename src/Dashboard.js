@@ -16,12 +16,11 @@ function Dashboard(props) {
   const [refreshToken, setRefreshToken] = useState(null);
   const [colour, setColour] = useState("#1DB954");
   const [searchResult, setSearchResult] = useState(null);
-  const [currentSong, setCurrentSong] = useState(null);
-  console.log("access token is", accessToken)
+  const [currentSongUri, setCurrentSongUri] = useState(null);
 
-  const onSongPick = (songUri) => {
-    console.log(songUri)
-    setCurrentSong(songUri);
+  const onSongPick = (songUri, albumColour) => {
+    setColour(albumColour)
+    setCurrentSongUri(songUri);
   }
   //console.log(searchResult)
 
@@ -36,10 +35,6 @@ const onChangeHandler = async (e) => {
   const songs = res.data.body.tracks.items;
   setSearchResult(songs)
 }
-
-  const onClickHandler = () => {
-    setColour("#D51EC3")
-  }
 
   //login
   useEffect( () => {
@@ -61,7 +56,6 @@ const onChangeHandler = async (e) => {
     {/*main div */}
     <div className="flex justify-center flex-col items-center h-screen">
      <div className='mt-36'>
-     <button onClick={onClickHandler}>press to change</button>
       <Timer/>
       <SearchBar onChange={onChangeHandler}/>
 
@@ -81,7 +75,6 @@ const onChangeHandler = async (e) => {
     },
     song.album.images[0]
   )
-  console.log(song)
   return <SongFrame
   key={song.uri}
   uri={song.uri}
@@ -92,20 +85,16 @@ const onChangeHandler = async (e) => {
   songTime={song.duration_ms} />
 })}
 
-<SongFrame artist={"Dvrst"} title={'close eyes'} songTime={"15:15"}/>
-
-<SongFrame artist={"DvrstRANDOMMMMMMMMM"} title={'close eyesSSSSSSSSSSSSS'} songTime={"15:15"}/>
-
 </div>
 
 
 
 
     </div>
-    <Player
+    {currentSongData && <Player
   accessToken={accessToken}
-  trackUri={currentSong}
-  />
+  trackUri={currentSongUri}
+  />}
     </>
   );
 }
