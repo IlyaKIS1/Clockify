@@ -56,7 +56,7 @@ const onChangeHandler = async (e) => {
     {/*main div */}
     <div className="flex justify-center flex-col items-center h-screen">
      <div className='mt-36'>
-      <Timer/>
+      <Timer isLoggedIn={true}/>
       <SearchBar onChange={onChangeHandler}/>
 
     </div>

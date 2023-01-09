@@ -16,7 +16,7 @@ function Login() {
     {/*main div */}
     <div className="flex justify-center flex-col items-center h-screen">
      <div >
-      <Timer/>
+      <Timer isLoggedIn={false}/>
       <ButtonLogIn/>
 
     </div>
