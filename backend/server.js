@@ -40,7 +40,7 @@ app.post("/search", async (req, res) => {
 
     spotifyApi.setAccessToken(data.body['access_token']);
     spotifyApi.setRefreshToken(data.body['refresh_token']);
-    console.log(spotifyApi)
+    res.send(data)
 
   });
 
