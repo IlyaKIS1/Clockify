@@ -91,10 +91,10 @@ const onChangeHandler = async (e) => {
 
 
     </div>
-    {currentSongData && <Player
+    <Player
   accessToken={accessToken}
   trackUri={currentSongUri}
-  />}
+  />
     </>
   );
 }
