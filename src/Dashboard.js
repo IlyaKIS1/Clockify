@@ -2,8 +2,10 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Footer from './components/Footer';
 import ParticlesLayer from './components/ParticlesLayer';
+import Player from './postLogin/Player';
 import SearchBar from './postLogin/SearchBar';
 import SearchResults from './postLogin/SearchResults';
+import SongFrame from './postLogin/SongFrame';
 import Timer from './postLogin/Timer';
 
 
@@ -14,6 +16,13 @@ function Dashboard(props) {
   const [refreshToken, setRefreshToken] = useState(null);
   const [colour, setColour] = useState("#1DB954");
   const [searchResult, setSearchResult] = useState(null);
+  const [currentSong, setCurrentSong] = useState(null);
+  console.log("access token is", accessToken)
+
+  const onSongPick = (songUri) => {
+    console.log(songUri)
+    setCurrentSong(songUri);
+  }
   //console.log(searchResult)
 
   //search
@@ -37,8 +46,9 @@ const onChangeHandler = async (e) => {
     axios.post('http://localhost:3001/login', {
         code: code
     }).then((result) => {
-        setAccessToken(result.body.access_token)
-  setRefreshToken(result.body.refresh_token)
+      const bodyTokens = result.data.body;
+        setAccessToken(bodyTokens.access_token);
+  setRefreshToken(bodyTokens.refresh_token);
     })
     }, [])
 
@@ -58,6 +68,7 @@ const onChangeHandler = async (e) => {
     </div>
 
     <br />
+
     <div className='overflow-scroll w-1/2 my-2'>
 
 
@@ -71,16 +82,19 @@ const onChangeHandler = async (e) => {
     song.album.images[0]
   )
   console.log(song)
-  return <SearchResults
+  return <SongFrame
   key={song.uri}
+  uri={song.uri}
   image={image.url}
+  onSongPick={onSongPick}
   artist={song.artists[0].name}
   title={song.name}
   songTime={song.duration_ms} />
 })}
-<SearchResults artist={"Dvrst"} title={'close eyes'} songTime={"15:15"}/>
 
-<SearchResults artist={"DvrstRANDOMMMMMMMMM"} title={'close eyesSSSSSSSSSSSSS'} songTime={"15:15"}/>
+<SongFrame artist={"Dvrst"} title={'close eyes'} songTime={"15:15"}/>
+
+<SongFrame artist={"DvrstRANDOMMMMMMMMM"} title={'close eyesSSSSSSSSSSSSS'} songTime={"15:15"}/>
 
 </div>
 
@@ -88,7 +102,10 @@ const onChangeHandler = async (e) => {
 
 
     </div>
-
+    <Player
+  accessToken={accessToken}
+  trackUri={currentSong}
+  />
     </>
   );
 }

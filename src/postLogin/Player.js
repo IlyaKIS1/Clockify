@@ -1,8 +1,26 @@
-import React from 'react'
-import SpotifyWebPlayer from 'react-spotify-web-playback/lib'
+import { useState, useEffect } from "react"
+import SpotifyPlayer from "react-spotify-web-playback"
 
-export default function Player() {
+export default function Player({ accessToken, trackUri }) {
+  const [play, setPlay] = useState(false)
+
+  useEffect(() => setPlay(true), [trackUri])
+
+  if (!accessToken) return null
+  console.log("HERE")
   return (
-    <h1 className='text-8xl font-abc text-white m-1'>00:00</h1>
+    <div className="fixed bottom-0 w-screen">
+
+
+    <SpotifyPlayer
+      token={accessToken}
+      showSaveIcon
+      callback={state => {
+        if (!state.isPlaying) setPlay(false)
+      }}
+      play={play}
+      uris={trackUri ? [trackUri] : []}
+    />
+    </div>
   )
 }
