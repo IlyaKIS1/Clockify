@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Footer from './components/Footer';
 import ParticlesLayer from './components/ParticlesLayer';
-import dvrst from './images/dvrst.jpg'; // Tell webpack this JS file uses this image
 import SearchBar from './postLogin/SearchBar';
 import SearchResults from './postLogin/SearchResults';
 import Timer from './postLogin/Timer';
@@ -34,14 +33,14 @@ const onChangeHandler = async (e) => {
   }
 
   //login
-  useEffect( async () => {
-
-    const result = await axios.post('http://localhost:3001/login', {
-    code: code
-  })
-  setAccessToken(result.body.access_token)
+  useEffect( () => {
+    axios.post('http://localhost:3001/login', {
+        code: code
+    }).then((result) => {
+        setAccessToken(result.body.access_token)
   setRefreshToken(result.body.refresh_token)
-  }, [])
+    })
+    }, [])
 
   return (
     <>
@@ -71,8 +70,13 @@ const onChangeHandler = async (e) => {
     },
     song.album.images[0]
   )
-  console.log(image.url)
-  return <SearchResults image={image.url} artist={song.artists[0].name} title={song.name} songTime={song.duration_ms} />
+  console.log(song)
+  return <SearchResults
+  key={song.uri}
+  image={image.url}
+  artist={song.artists[0].name}
+  title={song.name}
+  songTime={song.duration_ms} />
 })}
 <SearchResults artist={"Dvrst"} title={'close eyes'} songTime={"15:15"}/>
 
