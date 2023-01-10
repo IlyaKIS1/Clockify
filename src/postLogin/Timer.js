@@ -10,11 +10,12 @@ function formatTime(hours, minutes, seconds) {
 
 export default function Timer(props) {
   const isLoggedIn = props.isLoggedIn;
-  const [time, setTime] = useState(1*4* 60*1000);
+  const [time, setTime] = useState(1*1* 30*1000);
 
   useEffect(() => {
     if (!isLoggedIn) return
     setTimeout(() => {
+      props.setTimeCurrently(time);
       if (time === 0) return;
       setTime(time - 1000);
     }, 1000)
