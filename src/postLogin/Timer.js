@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import SettingUpTimer from './SettingUpTimer';
 
 function formatTime(hours, minutes, seconds) {
   const paddedHours = hours.toString().padStart(2, '0');
@@ -10,16 +11,41 @@ function formatTime(hours, minutes, seconds) {
 
 export default function Timer(props) {
   const isLoggedIn = props.isLoggedIn;
-  const [time, setTime] = useState(1*1* 30*1000);
+  const [timeObject, setTimeObject] = useState({hours:0, minutes:1, seconds:3})
 
   useEffect(() => {
     if (!isLoggedIn) return
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
+      let time = (timeObject.hours * 60 * 60
+        + timeObject.minutes * 60 + timeObject.seconds) * 1000;
       props.setTimeCurrently(time);
       if (time === 0) return;
-      setTime(time - 1000);
+      else if (timeObject.seconds === 0 &&
+        timeObject.minutes === 0
+        ) setTimeObject((prevState) => ({
+          hours: prevState.hours - 1,
+          minutes: 59,
+          seconds: 59
+        }))
+      else if (timeObject.seconds === 0){
+        setTimeObject((prevState) => ({
+          ...prevState,
+          minutes: prevState.minutes - 1,
+          seconds:59
+        }))
+      }
+      else {
+        setTimeObject((prevState) => ({
+          ...prevState,
+          seconds: prevState.seconds - 1,
+        }))
+      }
     }, 1000)
-  }, [time])
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [timeObject.seconds, timeObject.minutes, timeObject.hours])
 
   if (!isLoggedIn) return (
     <h1 className='text-8xl font-abc text-white m-1'>00:00</h1>
@@ -41,7 +67,9 @@ export default function Timer(props) {
 
   return (
     <>
-    <h1 className='text-8xl font-abc text-white m-1'>{getFormattedTime(time)}</h1>
+    <h1 className='text-8xl font-abc text-white m-1'>{getFormattedTime((timeObject.hours * 60 * 60
+        + timeObject.minutes * 60 + timeObject.seconds) * 1000)}</h1>
+    <SettingUpTimer onTimerChange={setTimeObject}/>
     <button className=" bg-spotify-green text-white w-full h-10 rounded-md">
 
       <div className="flex justify-center items-center h-full w-full">

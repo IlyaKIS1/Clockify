@@ -5,6 +5,7 @@ import ParticlesLayer from './components/ParticlesLayer';
 import Player from './postLogin/Player';
 import SearchBar from './postLogin/SearchBar';
 import SearchResults from './postLogin/SearchResults';
+import SettingUpTimer from './postLogin/SettingUpTimer';
 import SongFrame from './postLogin/SongFrame';
 import Timer from './postLogin/Timer';
 
@@ -58,6 +59,7 @@ const onChangeHandler = async (e) => {
     <div className="flex justify-center flex-col items-center h-screen">
      <div className='mt-36'>
       <Timer isLoggedIn={true} setTimeCurrently={setTimeCurrently}/>
+
       <SearchBar onChange={onChangeHandler}/>
 
     </div>
