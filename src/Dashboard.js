@@ -16,6 +16,7 @@ function Dashboard(props) {
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
   const [colour, setColour] = useState("#1DB954");
+  const [isButtonClicked, setIsButtonClicked]= useState(false);
   const [timeCurrently, setTimeCurrently] = useState(1*4* 60*1000);
   const [searchResult, setSearchResult] = useState(null);
   const [currentSongUri, setCurrentSongUri] = useState(null);
@@ -58,7 +59,13 @@ const onChangeHandler = async (e) => {
     {/*main div */}
     <div className="flex justify-center flex-col items-center h-screen">
      <div className='mt-36'>
-      <Timer isLoggedIn={true} setTimeCurrently={setTimeCurrently}/>
+      <Timer
+      isLoggedIn={true}
+      setTimeCurrently={setTimeCurrently}
+      buttonColour={colour}
+      isButtonClicked={isButtonClicked}
+      onButtonClick={setIsButtonClicked}
+      />
 
       <SearchBar onChange={onChangeHandler}/>
 
@@ -98,6 +105,7 @@ const onChangeHandler = async (e) => {
   accessToken={accessToken}
   trackUri={currentSongUri}
   time={timeCurrently}
+  buttonClicked={isButtonClicked}
   />}
     </>
   );

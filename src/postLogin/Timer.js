@@ -11,10 +11,12 @@ function formatTime(hours, minutes, seconds) {
 
 export default function Timer(props) {
   const isLoggedIn = props.isLoggedIn;
-  const [timeObject, setTimeObject] = useState({hours:0, minutes:1, seconds:3})
+  const isButtonClicked = props.isButtonClicked;
+  const [timeObject, setTimeObject] = useState({hours:0, minutes:0, seconds:0})
 
   useEffect(() => {
     if (!isLoggedIn) return
+    if (!isButtonClicked) return
     const timeoutId = setTimeout(() => {
       let time = (timeObject.hours * 60 * 60
         + timeObject.minutes * 60 + timeObject.seconds) * 1000;
@@ -45,7 +47,11 @@ export default function Timer(props) {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [timeObject.seconds, timeObject.minutes, timeObject.hours])
+  }, [timeObject.seconds,
+    timeObject.minutes,
+    timeObject.hours,
+    isButtonClicked
+  ])
 
   if (!isLoggedIn) return (
     <h1 className='text-8xl font-abc text-white m-1'>00:00</h1>
@@ -70,10 +76,16 @@ export default function Timer(props) {
     <h1 className='text-8xl font-abc text-white m-1'>{getFormattedTime((timeObject.hours * 60 * 60
         + timeObject.minutes * 60 + timeObject.seconds) * 1000)}</h1>
     <SettingUpTimer onTimerChange={setTimeObject}/>
-    <button className=" bg-spotify-green text-white w-full h-10 rounded-md">
+    <button
+    style={{backgroundColor: props.buttonColour}}
+    className=" bg-spotify-green text-white w-full h-10 rounded-md"
+    onClick={() => {
+      props.onButtonClick((prevState) => !prevState)
+    }}
+    >
 
       <div className="flex justify-center items-center h-full w-full">
-      Set the timer
+      {isButtonClicked ? "Stop the timer" : "Set the timer"}
 
       </div>
       </button>

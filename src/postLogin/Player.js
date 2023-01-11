@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react"
 import SpotifyPlayer from "react-spotify-web-playback"
 
-export default function Player({ accessToken, trackUri, time }) {
+export default function Player({buttonClicked, accessToken, trackUri, time }) {
   console.log("time is", time)
   console.log("PLAYER")
   const [play, setPlay] = useState(false)
   let autoPlay = false;
 
   useEffect(() => {
-    if (time === 0) {
+    if (time === 0 && buttonClicked) {
       autoPlay = true;
       setPlay(true)
     }
