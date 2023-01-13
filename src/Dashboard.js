@@ -15,9 +15,13 @@ function Dashboard(props) {
 
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
+
+  //default green
   const [colour, setColour] = useState("#1DB954");
   const [isButtonClicked, setIsButtonClicked]= useState(false);
-  const [timeCurrently, setTimeCurrently] = useState(1*4* 60*1000);
+
+  //set to 5 seconds, so that app does not start with the player on
+  const [timeCurrently, setTimeCurrently] = useState(5000);
   const [searchResult, setSearchResult] = useState(null);
   const [currentSongUri, setCurrentSongUri] = useState(null);
 
@@ -25,7 +29,6 @@ function Dashboard(props) {
     setColour(albumColour)
     setCurrentSongUri(songUri);
   }
-  //console.log(searchResult)
 
   //search
 const onChangeHandler = async (e) => {
@@ -101,7 +104,8 @@ const onChangeHandler = async (e) => {
 
 
     </div>
-    {!timeCurrently && <Player
+    {/*4 seconds is the delay time*/}
+    {timeCurrently < 4000 && <Player
   accessToken={accessToken}
   trackUri={currentSongUri}
   time={timeCurrently}

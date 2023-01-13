@@ -8,8 +8,31 @@ function componentToHex(c) {
 }
 
 function rgbToHex(r, g, b) {
+  console.log(r, g, b)
   return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
+
+function formatTime(hours, minutes, seconds) {
+  const paddedHours = hours.toString().padStart(2, '0');
+  const paddedMinutes = minutes.toString().padStart(2, '0');
+  const paddedSeconds = seconds.toString().padStart(2, '0');
+  return `${paddedHours}:${paddedMinutes}:${paddedSeconds}`;
+}
+
+function getFormattedTime(miliseconds) {
+  let total_seconds = parseInt(Math.floor(miliseconds/1000));
+  let total_minutes = parseInt(Math.floor(total_seconds/60));
+  let total_hours = parseInt(Math.floor(total_minutes/60));
+
+  let seconds = parseInt(total_seconds % 60);
+  let minutes = parseInt(total_minutes % 60);
+  let hours = parseInt(total_hours % 24);
+  return formatTime(hours, minutes, seconds)
+
+};
+
+
+
 
 export default function SongFrame(props) {
 
@@ -40,7 +63,7 @@ export default function SongFrame(props) {
     </div>
 
     {/* time of song */}
-    <h2 className='text-sm hidden text-spotify-gray md:inline'>{props.songTime}</h2>
+    <h2 className='text-sm hidden text-spotify-gray md:inline'>{getFormattedTime(props.songTime)}</h2>
 
     </div>
 

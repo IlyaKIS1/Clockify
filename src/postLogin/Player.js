@@ -5,15 +5,17 @@ export default function Player({buttonClicked, accessToken, trackUri, time }) {
   console.log("time is", time)
   console.log("PLAYER")
   const [play, setPlay] = useState(false)
-  let autoPlay = false;
 
   useEffect(() => {
-    if (time === 0 && buttonClicked) {
-      autoPlay = true;
+    if (buttonClicked && time === 0) {
+      console.log("START")
       setPlay(true)
+    } else {
+      console.log("STOP")
+      setPlay(false)
     }
   }
-    , [trackUri])
+    , [trackUri, time])
 
   if (!accessToken) return null
   return (
@@ -26,6 +28,8 @@ export default function Player({buttonClicked, accessToken, trackUri, time }) {
       showSaveIcon
       callback={state => {
         if (!state.isPlaying) setPlay(false)
+        if (state.isPlaying) setPlay(true)
+        if (time != 0) setPlay(false)
       }}
       play={play}
       uris={trackUri ? [trackUri] : []}

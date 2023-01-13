@@ -71,6 +71,13 @@ export default function Timer(props) {
 
   };
 
+  let buttonText = isButtonClicked ? "Stop the timer" : "Start the timer";
+  if (timeObject.hours === timeObject.minutes &&
+    timeObject.minutes === timeObject.seconds && timeObject.seconds === 0){
+      buttonText = "Start the timer"
+    }
+
+
   return (
     <>
     <h1 className='text-8xl font-abc text-white m-1'>{getFormattedTime((timeObject.hours * 60 * 60
@@ -85,7 +92,7 @@ export default function Timer(props) {
     >
 
       <div className="flex justify-center items-center h-full w-full">
-      {isButtonClicked ? "Stop the timer" : "Set the timer"}
+      {buttonText}
 
       </div>
       </button>
