@@ -15,7 +15,7 @@ export default function Player({buttonClicked, accessToken, trackUri, time }) {
       setPlay(false)
     }
   }
-    , [trackUri, time])
+    , [trackUri, time, buttonClicked])
 
   if (!accessToken) return null
   return (
@@ -29,7 +29,7 @@ export default function Player({buttonClicked, accessToken, trackUri, time }) {
       callback={state => {
         if (!state.isPlaying) setPlay(false)
         if (state.isPlaying) setPlay(true)
-        if (time != 0) setPlay(false)
+        if (time !== 0) setPlay(false)
       }}
       play={play}
       uris={trackUri ? [trackUri] : []}

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import useTime from '../hooks/useTime';
 import ButtonTimerStart from './ButtonTimerStart';
 import SettingUpTimer from './SettingUpTimer';

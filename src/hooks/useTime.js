@@ -39,7 +39,9 @@ function useTime(time, isLoggedIn, isButtonClicked, callbackToSaveTime) {
     }, [timeObject.seconds,
       timeObject.minutes,
       timeObject.hours,
-      isButtonClicked
+      isButtonClicked,
+      callbackToSaveTime,
+      isLoggedIn
     ])
 
   return [timeObject, setTimeObject];
