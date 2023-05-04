@@ -4,7 +4,7 @@ import getAverageColor from 'get-average-color'
 function componentToHex(c) {
   c.toString()
   var hex = c.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
+  return hex.length === 1 ? "0" + hex : hex;
 }
 
 function rgbToHex(r, g, b) {
@@ -49,7 +49,7 @@ export default function SongFrame(props) {
     <div className='flex'>
       {/* pic */}
         <div className='hidden md:block overflow-hidden'>
-          <img src={props.image} className="h-12 w-12" />
+          <img alt='album cover' src={props.image} className="h-12 w-12" />
         </div>
 
     {/* artist data */}

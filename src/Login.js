@@ -4,8 +4,6 @@ import Footer from './components/Footer';
 import ParticlesLayer from './components/ParticlesLayer';
 import Timer from './postLogin/Timer';
 
-const code = new URLSearchParams(window.location.search).get("code")
-
 function Login() {
   return (
     <>
